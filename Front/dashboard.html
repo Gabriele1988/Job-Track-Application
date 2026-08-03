@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Aziende</title>
+
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+    <header>
+        <h1>Job Tracker</h1>
+
+        <nav class="nav-links" aria-label="Navigazione principale">
+            <a class="app-link active" href="./dashboard.html">Aziende</a>
+            <a class="app-link" href="./candidature.html">Candidature</a>
+            <a class="app-link" href="./azienda-form.html">Nuova Azienda</a>
+            <a class="app-link" href="./candidatura-form.html">Nuova Candidatura</a>
+            <span class="nav-divider" aria-hidden="true"></span>
+            <span class="user-name" id="userNameDisplay">Utente</span>
+            <a class="app-link logout-link" href="./login.html" id="logoutBtn">Logout</a>
+        </nav>
+    </header>
+
+    <div class="main-wrapper">
+        <main>
+            <section class="page-head reveal-up">
+                <div>
+                    <h2 class="page-title">Aziende salvate</h2>
+                    <p class="page-subtitle">
+                        Consulta, filtra e gestisci le aziende salvate.
+                    </p>
+                </div>
+
+                <a href="./azienda-form.html" class="btn btn-primary">+ Nuova Azienda</a>
+            </section>
+
+            <section class="filters-card reveal-up" aria-label="Filtri aziende">
+                <div class="azienda-filter-bar">
+                    <div class="azienda-search-group">
+                        <label for="searchAzienda">Cerca azienda</label>
+                        <input
+                            type="text"
+                            id="searchAzienda"
+                            placeholder="Cerca per nome, città o settore"
+                        />
+                    </div>
+
+                    <div class="azienda-filter-actions">
+                        <button type="button" class="btn btn-primary" id="searchBtn">
+                            Cerca
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="resetSearchBtn">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="aziende-results-section reveal-up">
+                <div class="cards-grid" id="aziendeGrid">
+                    <!-- Card renderizzate via JS -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODALE MODIFICA AZIENDA -->
+    <div class="modal-overlay" id="editAziendaModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <h3>Modifica azienda</h3>
+                    <p>Aggiorna i dati dell’azienda selezionata.</p>
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeEditAziendaModal"
+                    aria-label="Chiudi modale modifica azienda"
+                >
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18"></path>
+                        <path d="M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <form id="editAziendaForm">
+                <div class="modal-form-grid">
+                    <div>
+                        <label for="editRagioneSociale">Ragione Sociale *</label>
+                        <input type="text" id="editRagioneSociale" required />
+                    </div>
+
+                    <div>
+                        <label for="editSettore">Settore</label>
+                        <input type="text" id="editSettore" />
+                    </div>
+
+                    <div>
+                        <label for="editCitta">Città</label>
+                        <input type="text" id="editCitta" />
+                    </div>
+
+                    <div>
+                        <label for="editSitoWeb">Sito Web URL</label>
+                        <input type="url" id="editSitoWeb" />
+                    </div>
+
+                    <div class="modal-full-width">
+                        <label for="editImmagineUrl">URL Immagine / Logo *</label>
+                        <input type="url" id="editImmagineUrl" required />
+                    </div>
+
+                    <div class="modal-full-width">
+                        <label for="editNote">Note</label>
+                        <textarea id="editNote"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelEditAziendaBtn">
+                        Annulla
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Salva modifiche
+                    </button>
+                </div>
+
+                <p class="modal-error" id="editAziendaError">Errore nel salvataggio.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODALE ELIMINA AZIENDA -->
+    <div class="modal-overlay" id="deleteAziendaModal" aria-hidden="true">
+        <div class="modal-card modal-card-sm">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <h3>Elimina azienda</h3>
+                    <p>Vuoi eliminare questo elemento?</p>
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeDeleteAziendaModal"
+                    aria-label="Chiudi modale elimina azienda"
+                >
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18"></path>
+                        <path d="M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelDeleteAziendaBtn">
+                    Annulla
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteAziendaBtn">
+                    Elimina
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="./js/api.js"></script>
+    <script type="module" src="./js/dashboard.js"></script>
+</body>
+</html>

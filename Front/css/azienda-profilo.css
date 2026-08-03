@@ -1,0 +1,641 @@
+/* =========================================================
+AZIENDA-PROFILO.CSS
+Pagina profilo azienda
+Allineato al design system condiviso di base.css
+========================================================= */
+
+/* =========================================================
+1. LAYOUT PAGINA
+========================================================= */
+.page-shell {
+    width: 100%;
+}
+
+.profile-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 1.1rem;
+}
+
+/* =========================================================
+2. HERO AZIENDA
+========================================================= */
+.company-profile-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    margin-bottom: 1.5rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.70));
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.company-profile-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.35), transparent 32%);
+    z-index: 1;
+}
+
+.company-profile-cover {
+    position: relative;
+    height: 290px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 28%),
+        linear-gradient(135deg, #dff4ff 0%, #eef6ff 45%, #dbeafe 100%);
+}
+
+.company-profile-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.03) contrast(1.02);
+}
+
+.company-profile-content {
+    position: relative;
+    z-index: 2;
+    padding: 1.6rem;
+}
+
+.company-profile-main {
+    width: 100%;
+}
+
+.company-profile-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.company-profile-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.company-sector-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    width: fit-content;
+    padding: 0.55rem 0.95rem;
+    border-radius: var(--radius-pill);
+    background: rgba(56, 189, 248, 0.12);
+    color: var(--primary-strong);
+    border: 1px solid rgba(56, 189, 248, 0.16);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.company-name {
+    margin: 0;
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    line-height: 1.02;
+    color: var(--text-dark);
+}
+
+.company-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.company-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 42px;
+    padding: 0.72rem 1rem;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.76);
+    border: 1px solid rgba(56, 189, 248, 0.10);
+    color: var(--text-body);
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition:
+        transform var(--transition-fast),
+        background-color var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+a.company-meta-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(56, 189, 248, 0.18);
+    color: var(--primary-strong);
+    box-shadow: var(--shadow-soft);
+}
+
+.company-meta-item svg {
+    width: 17px;
+    height: 17px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+.company-profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+/* =========================================================
+3. BOTTONI ICONA
+Allineati a dashboard.css / candidature.css
+========================================================= */
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(56, 189, 248, 0.14);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.84);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--text-body);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+        transform var(--transition-fast),
+        background-color var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.icon-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+}
+
+.icon-btn svg,
+.modal-close svg {
+    width: 17px;
+    height: 17px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.icon-btn-edit {
+    color: var(--primary-strong);
+}
+
+.icon-btn-edit:hover {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.24);
+}
+
+.icon-btn-delete {
+    color: var(--danger-text);
+}
+
+.icon-btn-delete:hover {
+    background: rgba(239, 68, 68, 0.10);
+    border-color: rgba(239, 68, 68, 0.20);
+}
+
+/* =========================================================
+4. CARD INFORMAZIONI
+========================================================= */
+.profile-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.9fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.profile-card {
+    background: var(--surface);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+    border-radius: var(--radius-lg);
+    padding: 1.35rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.55), transparent 24%);
+    opacity: 0.9;
+}
+
+.profile-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.profile-card h3 {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+.profile-text {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.97rem;
+    line-height: 1.75;
+    white-space: pre-wrap;
+}
+
+.profile-stats {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.stat-box {
+    padding: 1rem;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.80), rgba(255,255,255,0.62));
+    border: 1px solid rgba(56, 189, 248, 0.10);
+}
+
+.stat-label {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--text-muted);
+    font-size: 0.83rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.stat-box strong {
+    display: block;
+    color: var(--text-dark);
+    font-size: 1.8rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+}
+
+/* =========================================================
+5. TABELLA CANDIDATURE
+Allineata a candidature.css
+========================================================= */
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.table-header h3 {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.candidature-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.candidature-table th,
+.candidature-table td {
+    padding: 1rem 0.85rem;
+    border-bottom: 1px solid rgba(148, 197, 255, 0.18);
+    vertical-align: middle;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.candidature-table th {
+    color: #52789d;
+    font-size: 0.74rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(255, 255, 255, 0.58);
+}
+
+.candidature-table tbody tr {
+    transition:
+        background-color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.candidature-table tbody tr:hover {
+    background: rgba(56, 189, 248, 0.05);
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    align-items: center;
+}
+
+.skill-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0.32rem 0.7rem;
+    border-radius: var(--radius-pill);
+    background: rgba(56, 189, 248, 0.12);
+    color: #0369a1;
+    border: 1px solid rgba(56, 189, 248, 0.16);
+    font-size: 0.78rem;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.skill-empty {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+}
+
+.actions-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+}
+
+.stato-actions-inline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+/* =========================================================
+6. MODALI
+Allineate a dashboard.css / candidature.css
+========================================================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(148, 163, 184, 0.24);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 1000;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 720px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-hover);
+    padding: 1.5rem;
+}
+
+.modal-card-sm {
+    max-width: 520px;
+}
+
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.modal-title-wrap h3 {
+    font-size: 1.35rem;
+    margin: 0 0 0.35rem;
+}
+
+.modal-title-wrap p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.modal-close {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--text-body);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+        background-color var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.modal-close:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-soft);
+}
+
+.modal-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.modal-full-width {
+    grid-column: 1 / -1;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.modal-error {
+    display: none;
+    margin-top: 1rem;
+    color: var(--danger-text);
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+/* =========================================================
+7. RESPONSIVE
+========================================================= */
+@media (max-width: 1024px) {
+    .company-profile-cover {
+        height: 250px;
+    }
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .company-profile-head,
+    .table-header,
+    .modal-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .company-profile-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .modal-actions .btn {
+        width: 100%;
+    }
+
+    .modal-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .table-responsive {
+        overflow: visible;
+    }
+
+    .candidature-table,
+    .candidature-table thead,
+    .candidature-table tbody,
+    .candidature-table th,
+    .candidature-table td,
+    .candidature-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .candidature-table thead {
+        display: none;
+    }
+
+    .candidature-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .candidature-table tbody tr {
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+        padding: 1rem;
+    }
+
+    .candidature-table tbody td {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.55rem;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid rgba(148, 197, 255, 0.14);
+        padding: 0.75rem 0;
+    }
+
+    .candidature-table tbody td:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .candidature-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 800;
+        color: #52789d;
+        text-align: left;
+        min-width: 0;
+        flex-shrink: 0;
+    }
+
+    .stato-actions-inline {
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .modal-card {
+        padding: 1.15rem;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 540px) {
+    .company-profile-cover {
+        height: 210px;
+    }
+
+    .company-profile-content,
+    .profile-card,
+    .table-card {
+        padding: 1.15rem;
+    }
+
+    .company-name {
+        font-size: 1.85rem;
+    }
+
+    .company-meta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .company-meta-item {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}

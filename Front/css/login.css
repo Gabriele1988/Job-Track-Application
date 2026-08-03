@@ -1,0 +1,98 @@
+/* =========================================================
+   LOGIN.CSS
+   Pagina login
+   Versione chiara: pulita, luminosa, moderna
+========================================================= */
+
+/* =========================================================
+   1. LAYOUT PAGINA LOGIN
+========================================================= */
+body.login-page {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+body.login-page main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+body.login-page .login-card {
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-radius: var(--radius-xl);
+}
+
+/* =========================================================
+   2. CARD LOGIN
+========================================================= */
+.login-card {
+    width: 100%;
+    max-width: 460px;
+    padding: 3rem 2rem;
+    border-radius: var(--radius-xl);
+}
+
+.login-card h2 {
+    text-align: center;
+    font-size: 2.1rem;
+    margin-bottom: 0.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    margin-bottom: 2rem;
+}
+
+.login-card .form-group + .form-group {
+    margin-top: 1.25rem;
+}
+
+/* =========================================================
+   3. PULSANTE SUBMIT
+========================================================= */
+.btn-submit {
+    width: 100%;
+    margin-top: 1.25rem;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 1rem 1rem;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fff;
+    background: var(--gradient-primary);
+    cursor: pointer;
+    box-shadow: 0 18px 36px -18px rgba(37, 99, 235, 0.32);
+    transition: all var(--transition-fast);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 24px 44px -18px rgba(56, 189, 248, 0.28);
+}
+
+/* =========================================================
+   4. RESPONSIVE
+========================================================= */
+@media (max-width: 540px) {
+    .login-card {
+        padding: 1.15rem;
+        border-radius: 20px;
+    }
+}

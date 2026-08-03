@@ -1,0 +1,18 @@
+Dati sensibili e configurazioni di ambiente
+.env
+*.env
+application-local.properties
+application-local.yml
+application-dev.properties
+application-dev.yml
+
+Cartelle di build e compilazione (file binari e temporanei)
+target/
+build/
+out/
+*.log
+
+Cache locale e file di sistema Windows
+.vscode/
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuova Candidatura</title>
+
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/form.css" />
+</head>
+<body>
+    <header>
+        <h1>Job Tracker</h1>
+
+        <nav class="nav-links" aria-label="Navigazione principale">
+            <a class="app-link" href="./dashboard.html">Aziende</a>
+            <a class="app-link" href="./candidature.html">Candidature</a>
+            <a class="app-link" href="./azienda-form.html">Nuova Azienda</a>
+            <a class="app-link active" href="./candidatura-form.html">Nuova Candidatura</a>
+            <span class="nav-divider" aria-hidden="true"></span>
+            <span class="user-name" id="userNameDisplay">Utente</span>
+            <a class="app-link logout-link" href="./login.html" id="logoutBtn">Logout</a>
+        </nav>
+    </header>
+
+    <div class="main-wrapper">
+        <main>
+            <section class="form-card reveal-up">
+                <h2>Nuova Candidatura</h2>
+                <p class="subtitle">Seleziona l’azienda e registra la candidatura</p>
+
+                <form id="candidaturaForm">
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="aziendaId">Azienda *</label>
+                            <select id="aziendaId" required>
+                                <option value="">Seleziona un'azienda</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="posizione">Posizione *</label>
+                            <input type="text" id="posizione" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stato">Stato *</label>
+                            <select id="stato" required>
+                                <option value="">Seleziona stato</option>
+                                <option value="Inviata">Inviata</option>
+                                <option value="In valutazione">In valutazione</option>
+                                <option value="Colloquio">Colloquio</option>
+                                <option value="Offerta">Offerta</option>
+                                <option value="Accettata">Accettata</option>
+                                <option value="Rigettato">Rigettato</option>
+                                <option value="Scartata">Scartata</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dataInvio">Data invio</label>
+                            <input type="date" id="dataInvio" />
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="skills">Skills</label>
+                            <input
+                                type="text"
+                                id="skills"
+                                placeholder="Es: JavaScript, React, SQL"
+                            />
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="note">Note</label>
+                            <textarea id="note"></textarea>
+                        </div>
+
+                        <div class="btn-group">
+                            <a href="./candidature.html" class="btn btn-secondary">Annulla</a>
+                            <button type="submit" class="btn btn-primary">Salva Candidatura</button>
+                        </div>
+                    </div>
+
+                    <p class="error-message" id="formError">Errore nel salvataggio.</p>
+                </form>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="./js/api.js"></script>
+    <script type="module" src="./js/candidatura-form.js"></script>
+</body>
+</html>

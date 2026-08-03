@@ -1,0 +1,479 @@
+/* =========================================================
+   DASHBOARD.CSS
+   Pagina elenco aziende
+   Versione light: card luminose, dettagli celesti, modali chiare
+========================================================= */
+
+/* =========================================================
+   1. FILTRI
+========================================================= */
+.azienda-filter-bar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.azienda-search-group {
+    flex: 1;
+    min-width: 280px;
+}
+
+.azienda-search-group input {
+    width: 100%;
+}
+
+.azienda-filter-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.azienda-filter-actions .btn {
+    min-width: 120px;
+}
+
+/* =========================================================
+   2. AREA RISULTATI
+========================================================= */
+.aziende-results-section {
+    width: 100%;
+    margin-top: 0.25rem;
+}
+
+/* =========================================================
+   3. GRIGLIA CARD
+========================================================= */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+    align-items: stretch;
+}
+
+.card-azienda {
+    width: 100%;
+    min-width: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.70));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    transition:
+        transform var(--transition-base),
+        box-shadow var(--transition-base),
+        border-color var(--transition-base);
+    content-visibility: auto;
+    contain-intrinsic-size: 0 360px;
+    cursor: pointer;
+    position: relative;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.card-azienda::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.36), transparent 34%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.card-azienda:focus-within,
+.card-azienda:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(56, 189, 248, 0.22);
+}
+
+.card-azienda:hover::after {
+    opacity: 1;
+}
+
+/* =========================================================
+   4. IMMAGINE CARD
+========================================================= */
+.card-img-wrapper {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #dff4ff 0%, #eef6ff 45%, #dbeafe 100%);
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.55s ease, filter 0.35s ease;
+    filter: saturate(1.04) contrast(1.03);
+}
+
+.card-azienda:hover .card-img-wrapper img {
+    transform: scale(1.07);
+}
+
+.card-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.9rem;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.84);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--primary-strong);
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(56, 189, 248, 0.18);
+    white-space: nowrap;
+    max-width: calc(100% - 130px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-image-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+/* =========================================================
+   5. BOTTONI ICONA
+========================================================= */
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(56, 189, 248, 0.14);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.84);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--text-body);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+        transform var(--transition-fast),
+        background-color var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.icon-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+}
+
+.icon-btn svg {
+    width: 17px;
+    height: 17px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.icon-btn-edit {
+    color: var(--primary-strong);
+}
+
+.icon-btn-edit:hover {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.24);
+}
+
+.icon-btn-delete {
+    color: var(--danger-text);
+}
+
+.icon-btn-delete:hover {
+    background: rgba(239, 68, 68, 0.10);
+    border-color: rgba(239, 68, 68, 0.20);
+}
+
+/* =========================================================
+   6. CORPO CARD
+========================================================= */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.45rem;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.55rem;
+    color: var(--text-dark);
+}
+
+.card-info {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+    white-space: pre-line;
+}
+
+.card-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.card-city {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 700;
+    color: var(--text-body);
+}
+
+.card-city-icon {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+    opacity: 0.9;
+}
+
+.card-link {
+    color: var(--primary-strong);
+    font-weight: 800;
+}
+
+.card-link:hover {
+    color: var(--primary);
+}
+
+/* =========================================================
+   7. EMPTY STATE
+========================================================= */
+.empty-state-card {
+    grid-column: 1 / -1;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.68));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    color: var(--text-muted);
+    font-weight: 700;
+    padding: 2rem;
+}
+
+/* =========================================================
+   8. MODALI
+========================================================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(148, 163, 184, 0.24);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 1000;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 720px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-hover);
+    padding: 1.5rem;
+}
+
+.modal-card-sm {
+    max-width: 520px;
+}
+
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.modal-title-wrap h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.35rem;
+}
+
+.modal-title-wrap p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.modal-close {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--text-body);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+        background-color var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.modal-close:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-soft);
+}
+
+.modal-close svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.modal-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.modal-full-width {
+    grid-column: 1 / -1;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.modal-error {
+    display: none;
+    margin-top: 1rem;
+    color: var(--danger-text);
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+/* =========================================================
+   9. RESPONSIVE
+========================================================= */
+@media (max-width: 1200px) {
+    .cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .azienda-filter-bar,
+    .azienda-filter-actions,
+    .modal-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .azienda-search-group {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .azienda-filter-actions .btn,
+    .modal-actions .btn {
+        width: 100%;
+    }
+
+    .modal-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-card {
+        padding: 1.15rem;
+        border-radius: 20px;
+    }
+
+    .card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 640px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-image-actions {
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+
+    .card-tag {
+        top: 0.75rem;
+        left: 0.75rem;
+    }
+}

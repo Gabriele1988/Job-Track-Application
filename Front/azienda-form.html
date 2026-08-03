@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuova Azienda</title>
+
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/form.css" />
+</head>
+<body>
+    <header>
+        <h1>Job Tracker</h1>
+
+        <nav class="nav-links" aria-label="Navigazione principale">
+            <a class="app-link" href="./dashboard.html">Aziende</a>
+            <a class="app-link" href="./candidature.html">Candidature</a>
+            <a class="app-link active" href="./azienda-form.html">Nuova Azienda</a>
+            <a class="app-link" href="./candidatura-form.html">Nuova Candidatura</a>
+            <span class="nav-divider" aria-hidden="true"></span>
+            <span class="user-name" id="userNameDisplay">Utente</span>
+            <a class="app-link logout-link" href="./login.html" id="logoutBtn">Logout</a>
+        </nav>
+    </header>
+
+    <div class="main-wrapper">
+        <main>
+            <section class="form-card reveal-up">
+                <h2>Nuova Azienda</h2>
+                <p class="subtitle">Registra i dati e aggiungi una copertina</p>
+
+                <form id="aziendaForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="ragioneSociale">Ragione Sociale *</label>
+                            <input type="text" id="ragioneSociale" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="settore">Settore</label>
+                            <input type="text" id="settore" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="citta">Città</label>
+                            <input type="text" id="citta" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sitoWeb">Sito Web URL</label>
+                            <input type="url" id="sitoWeb" />
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="immagineUrl">URL Immagine / Logo *</label>
+                            <input type="url" id="immagineUrl" required />
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="note">Note</label>
+                            <textarea id="note"></textarea>
+                        </div>
+
+                        <div class="btn-group">
+                            <a href="./dashboard.html" class="btn btn-secondary">Annulla</a>
+                            <button type="submit" class="btn btn-primary">Salva Azienda</button>
+                        </div>
+                    </div>
+
+                    <p class="error-message" id="formError">Errore nel salvataggio.</p>
+                </form>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="./js/api.js"></script>
+    <script type="module" src="./js/azienda-form.js"></script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidature</title>
+
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/candidature.css" />
+</head>
+<body>
+    <header>
+        <h1>Job Tracker</h1>
+
+        <nav class="nav-links" aria-label="Navigazione principale">
+            <a class="app-link" href="./dashboard.html">Aziende</a>
+            <a class="app-link active" href="./candidature.html">Candidature</a>
+            <a class="app-link" href="./azienda-form.html">Nuova Azienda</a>
+            <a class="app-link" href="./candidatura-form.html">Nuova Candidatura</a>
+            <span class="nav-divider" aria-hidden="true"></span>
+            <span class="user-name" id="userNameDisplay">Utente</span>
+            <a class="app-link logout-link" href="./login.html" id="logoutBtn">Logout</a>
+        </nav>
+    </header>
+
+    <div class="main-wrapper">
+        <main>
+            <section class="page-head reveal-up">
+                <div>
+                    <h2 class="page-title">Candidature</h2>
+                    <p class="page-subtitle">
+                        Consulta e gestisci le candidature salvate.
+                    </p>
+                </div>
+
+                <a href="./candidatura-form.html" class="btn btn-primary">+ Nuova Candidatura</a>
+            </section>
+
+            <section class="filters-card reveal-up" aria-label="Filtri candidature">
+                <div class="filters-grid">
+                    <div>
+                        <label for="filterAzienda">Azienda</label>
+                        <input
+                            type="text"
+                            id="filterAzienda"
+                            placeholder="Inserisci azienda"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="filterPosizione">Posizione</label>
+                        <input
+                            type="text"
+                            id="filterPosizione"
+                            placeholder="Inserisci posizione"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="filterStato">Stato</label>
+                        <select id="filterStato">
+                            <option value="">Tutti gli stati</option>
+                            <option value="Inviata">Inviata</option>
+                            <option value="In valutazione">In valutazione</option>
+                            <option value="Colloquio">Colloquio</option>
+                            <option value="Offerta">Offerta</option>
+                            <option value="Accettata">Accettata</option>
+                            <option value="Rigettato">Rigettato</option>
+                            <option value="Scartata">Scartata</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filters-actions">
+                    <button type="button" class="btn btn-primary" id="applyFiltersBtn">
+                        Applica filtri
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="resetFiltersBtn">
+                        Reset
+                    </button>
+                </div>
+            </section>
+
+            <section class="table-card reveal-up">
+                <div class="table-header">
+                    <h3>Elenco candidature</h3>
+                    <span class="results-count" id="resultsCount">0 risultati</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="candidature-table">
+                        <thead>
+                            <tr>
+                                <th>Azienda</th>
+                                <th>Posizione</th>
+                                <th>Stato</th>
+                                <th>Data invio</th>
+                                <th>Skills</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody id="candidatureTableBody">
+                            <!-- Righe via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODALE MODIFICA CANDIDATURA -->
+    <div class="modal-overlay" id="editCandidaturaModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <h3>Modifica candidatura</h3>
+                    <p>Aggiorna i dati della candidatura selezionata.</p>
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeEditCandidaturaModal"
+                    aria-label="Chiudi modale modifica candidatura"
+                >
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18"></path>
+                        <path d="M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <form id="editCandidaturaForm">
+                <div class="modal-form-grid">
+                    <div>
+                        <label for="editAziendaId">Azienda *</label>
+                        <select id="editAziendaId" required></select>
+                    </div>
+
+                    <div>
+                        <label for="editPosizione">Posizione *</label>
+                        <input type="text" id="editPosizione" required />
+                    </div>
+
+                    <div>
+                        <label for="editStato">Stato *</label>
+                        <select id="editStato" required>
+                            <option value="">Seleziona stato</option>
+                            <option value="Inviata">Inviata</option>
+                            <option value="In valutazione">In valutazione</option>
+                            <option value="Colloquio">Colloquio</option>
+                            <option value="Offerta">Offerta</option>
+                            <option value="Accettata">Accettata</option>
+                            <option value="Rigettato">Rigettato</option>
+                            <option value="Scartata">Scartata</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="editDataInvio">Data invio</label>
+                        <input type="date" id="editDataInvio" />
+                    </div>
+
+                    <div class="modal-full-width">
+                        <label for="editSkills">Skills</label>
+                        <input
+                            type="text"
+                            id="editSkills"
+                            placeholder="Es: JavaScript, React, SQL"
+                        />
+                    </div>
+
+                    <div class="modal-full-width">
+                        <label for="editNoteCandidatura">Note</label>
+                        <textarea id="editNoteCandidatura"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelEditCandidaturaBtn">
+                        Annulla
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Salva modifiche
+                    </button>
+                </div>
+
+                <p class="modal-error" id="editCandidaturaError">Errore nel salvataggio.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODALE ELIMINA CANDIDATURA -->
+    <div class="modal-overlay" id="deleteCandidaturaModal" aria-hidden="true">
+        <div class="modal-card modal-card-sm">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <h3>Elimina candidatura</h3>
+                    <p>Vuoi eliminare questa candidatura?</p>
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeDeleteCandidaturaModal"
+                    aria-label="Chiudi modale elimina candidatura"
+                >
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18"></path>
+                        <path d="M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelDeleteCandidaturaBtn">
+                    Annulla
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteCandidaturaBtn">
+                    Elimina
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="./js/api.js"></script>
+    <script type="module" src="./js/candidature.js"></script>
+</body>
+</html>
