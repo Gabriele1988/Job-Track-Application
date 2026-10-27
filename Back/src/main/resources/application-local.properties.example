@@ -1,0 +1,4 @@
+# Copia questo file come application-local.properties (nella stessa cartella)
+# e inserisci la password del tuo PostgreSQL locale.
+# application-local.properties e' escluso da git, quindi la password non finisce su GitHub.
+spring.datasource.password=LA_TUA_PASSWORD_LOCALE

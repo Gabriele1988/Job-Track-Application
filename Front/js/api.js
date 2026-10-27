@@ -3,7 +3,14 @@
 // Servizio centralizzato per tutte le chiamate REST
 // =========================================================
 
-const BASE_URL = 'http://localhost:8080/rest';
+// Indirizzo del backend pubblicato su Render.
+// Se Render ti assegna un nome diverso, aggiorna solo questa riga.
+const PROD_API_URL = 'https://job-track-application.onrender.com/rest';
+
+// In locale (file aperto dal PC o Live Server) usa il backend sul tuo PC,
+// online usa quello su Render.
+const IS_LOCAL = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+const BASE_URL = IS_LOCAL ? 'http://localhost:8080/rest' : PROD_API_URL;
 
 const ApiService = {
     // -----------------------------------------------------
