@@ -5,7 +5,7 @@
 
 // Indirizzo del backend pubblicato su Render.
 // Se Render ti assegna un nome diverso, aggiorna solo questa riga.
-const PROD_API_URL = 'https://job-track-application.onrender.com/rest';
+const PROD_API_URL = 'https://job-track-application-kb3d.onrender.com/rest';
 
 // In locale (file aperto dal PC o Live Server) usa il backend sul tuo PC,
 // online usa quello su Render.
