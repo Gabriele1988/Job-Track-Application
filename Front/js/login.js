@@ -46,7 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             sessionStorage.setItem('utente', JSON.stringify({
                 nome: utenteLoggato.nome || utenteLoggato.username,
-                username: utenteLoggato.username
+                username: utenteLoggato.username,
+                token: utenteLoggato.token
             }));
 
             window.location.href = 'dashboard.html';

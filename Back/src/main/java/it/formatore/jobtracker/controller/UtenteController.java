@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import it.formatore.jobtracker.model.Utente;
 import it.formatore.jobtracker.repository.UtenteRepository;
+import it.formatore.jobtracker.security.AuthTokenService;
 
 @RestController
 @RequestMapping("/rest/utenti")
@@ -22,9 +23,11 @@ import it.formatore.jobtracker.repository.UtenteRepository;
 public class UtenteController {
 
     private final UtenteRepository repo;
+    private final AuthTokenService tokenService;
 
-    public UtenteController(UtenteRepository repo) {
+    public UtenteController(UtenteRepository repo, AuthTokenService tokenService) {
         this.repo = repo;
+        this.tokenService = tokenService;
     }
 
     @GetMapping
@@ -41,8 +44,11 @@ public class UtenteController {
                 .findFirst()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Credenziali errate"));
 
+        // Il token serve al frontend per poter modificare i dati (vedi WriteProtectionInterceptor)
         return Map.of(
-                "username", trovato.getUsername()
+                "username", trovato.getUsername(),
+                "nome", trovato.getNome() != null ? trovato.getNome() : trovato.getUsername(),
+                "token", tokenService.createToken(trovato.getUsername())
         );
     }
 }

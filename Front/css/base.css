@@ -597,3 +597,45 @@ html.gsap-ready .reveal-scale {
         font-size: 1.55rem;
     }
 }
+/* =========================================================
+   MODALITA' OSPITE (sola lettura)
+   Nasconde ogni comando che crea, modifica o elimina dati.
+========================================================= */
+.guest-banner {
+    position: relative;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    color: var(--text-body);
+    background: var(--primary-soft);
+    border-bottom: 1px solid var(--border-strong);
+    text-align: center;
+}
+
+.guest-banner-link {
+    font-weight: 800;
+    color: var(--primary-strong);
+    text-decoration: none;
+}
+
+.guest-banner-link:hover {
+    text-decoration: underline;
+}
+
+.guest-mode a[href*="-form.html"],
+.guest-mode [data-action="edit"],
+.guest-mode [data-action="delete"],
+.guest-mode .icon-btn-edit,
+.guest-mode .icon-btn-delete,
+.guest-mode .card-image-actions,
+.guest-mode .company-profile-actions,
+.guest-mode .actions-wrap,
+.guest-mode td[data-label="Azioni"],
+.guest-mode th.col-azioni {
+    display: none !important;
+}

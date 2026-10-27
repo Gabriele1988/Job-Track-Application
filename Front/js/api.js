@@ -12,6 +12,59 @@ const PROD_API_URL = 'https://job-track-application-kb3d.onrender.com/rest';
 const IS_LOCAL = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
 const BASE_URL = IS_LOCAL ? 'http://localhost:8080/rest' : PROD_API_URL;
 
+// =========================================================
+// SESSIONE E MODALITA' OSPITE
+// L'utente che fa login riceve un token dal backend e puo' modificare i dati.
+// L'ospite non ha token: vede tutto ma in sola lettura.
+// =========================================================
+function getSessione() {
+    try {
+        return JSON.parse(sessionStorage.getItem('utente') || 'null');
+    } catch {
+        return null;
+    }
+}
+
+function getAuthToken() {
+    return getSessione()?.token || null;
+}
+
+function isGuest() {
+    const sessione = getSessione();
+    return !!sessione && !sessione.token;
+}
+
+const GUEST_MESSAGE = 'Modalità ospite: puoi solo consultare i dati. Accedi per modificarli.';
+
+(function initGuestMode() {
+    const pagina = window.location.pathname.split('/').pop();
+
+    if (!isGuest() || pagina === 'login.html') return;
+
+    // Le pagine di inserimento non hanno senso in sola lettura
+    if (pagina === 'azienda-form.html') {
+        window.location.replace('dashboard.html');
+        return;
+    }
+    if (pagina === 'candidatura-form.html') {
+        window.location.replace('candidature.html');
+        return;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.add('guest-mode');
+
+        const banner = document.createElement('div');
+        banner.className = 'guest-banner';
+        banner.innerHTML =
+            '<span>Stai visitando il progetto come <strong>ospite</strong>: modalità sola lettura.</span>' +
+            '<a href="./login.html" class="guest-banner-link">Accedi</a>';
+        document.body.prepend(banner);
+
+        banner.querySelector('a').addEventListener('click', () => sessionStorage.removeItem('utente'));
+    });
+})();
+
 const ApiService = {
     // -----------------------------------------------------
     // Costruisce una query string a partire da un oggetto
@@ -39,13 +92,25 @@ const ApiService = {
     // - normalizza gli errori del backend
     // -----------------------------------------------------
     async request(endpoint, options = {}) {
+        const method = (options.method || 'GET').toUpperCase();
+        const isLogin = endpoint === '/utenti/login';
+
+        if (method !== 'GET' && !isLogin && isGuest()) {
+            throw new Error(GUEST_MESSAGE);
+        }
+
         const config = {
-            method: options.method || 'GET',
+            method,
             headers: {
                 Accept: 'application/json',
                 ...(options.headers || {})
             }
         };
+
+        const token = getAuthToken();
+        if (token && !isLogin) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
 
         if (options.body !== undefined && options.body !== null) {
             config.headers['Content-Type'] = 'application/json';
@@ -62,6 +127,10 @@ const ApiService = {
 
             if (response.status !== 204) {
                 data = isJson ? await response.json() : await response.text();
+            }
+
+            if (response.status === 401) {
+                throw new Error('Sessione scaduta o accesso in sola lettura: rifai il login per modificare i dati.');
             }
 
             if (!response.ok) {

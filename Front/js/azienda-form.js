@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            await ApiService.creaAzienda(payload);
+            await ApiService.createAzienda(payload);
             window.location.href = 'dashboard.html';
         } catch (error) {
             showError(errorBox, error.message || 'Errore nel salvataggio.');
