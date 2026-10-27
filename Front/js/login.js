@@ -5,10 +5,21 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('loginForm');
-    const errorBox = document.getElementById('errorBox');
+    const errorBox = document.getElementById('loginError');
 
     if (window.initRevealAnimations) {
         initRevealAnimations();
+    }
+
+    const guestBtn = document.getElementById('guestBtn');
+    if (guestBtn) {
+        guestBtn.addEventListener('click', () => {
+            sessionStorage.setItem('utente', JSON.stringify({
+                nome: 'Ospite',
+                username: 'ospite'
+            }));
+            window.location.href = 'dashboard.html';
+        });
     }
 
     if (!form) return;

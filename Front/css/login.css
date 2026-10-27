@@ -88,6 +88,51 @@ body.login-page .login-card {
 }
 
 /* =========================================================
+   3b. ACCESSO OSPITE
+========================================================= */
+.guest-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--text-soft);
+    font-size: 0.85rem;
+}
+
+.guest-divider::before,
+.guest-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border-strong);
+}
+
+.btn-guest {
+    width: 100%;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-strong);
+    background: var(--surface-strong);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-guest:hover {
+    transform: translateY(-2px);
+    background: var(--primary-soft);
+}
+
+.guest-note {
+    margin-top: 0.6rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* =========================================================
    4. RESPONSIVE
 ========================================================= */
 @media (max-width: 540px) {
