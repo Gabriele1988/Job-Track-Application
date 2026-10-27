@@ -1,5 +1,7 @@
 package it.formatore.jobtracker.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,8 @@ public class Utente {
 
     @Column(length = 50, nullable = false)
     private String username;
+    // La password si puo' inviare (login) ma non viene mai restituita nelle risposte JSON
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(length = 10, nullable = false)
     private String password;
     @Column(length = 50, nullable = false)
